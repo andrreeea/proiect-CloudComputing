@@ -1,5 +1,3 @@
-// /pages/records/create.jsx
-
 import RecordForm from "@/components/RecordForm";
 import { recordDefaultValues } from "@/utils/constants";
 import { createRecord } from "@/utils/recordsFunctions";

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
@@ -68,50 +69,58 @@ export default function Dashboard() {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Dashboard - Evoluția EUR/RON anul 2025</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Dashboard - Evoluția EUR/RON în anul 2025</h1>
+        <Link href="/">
+          <span className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition cursor-pointer text-sm">
+            Înapoi la pagina principală
+          </span>
+        </Link>
+      </div>
 
       <div className="flex flex-wrap gap-4 mb-4">
         <button
-            onClick={() => setViewMode("monthly")}
-            className={`px-4 py-2 rounded font-medium transition ${
-                viewMode === 'monthly'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-            }`}
-         >
-        Lunar
-        </button>
-
-        <button
-            onClick={() => setViewMode("weekly")}
-            className={`px-4 py-2 rounded font-medium transition ${
-                viewMode === 'monthly'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-            }`}
-        >
-        Săptămânal
-        </button>
-
-        <button
-        onClick={() => setViewMode("daily")}
-        className={`px-4 py-2 rounded font-medium transition ${
+          onClick={() => setViewMode("monthly")}
+          className={`px-4 py-2 rounded font-medium transition ${
             viewMode === 'monthly'
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-        }`}
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+          }`}
         >
-        Zilnic
+          Lunar
         </button>
-        
+
+        <button
+          onClick={() => setViewMode("weekly")}
+          className={`px-4 py-2 rounded font-medium transition ${
+            viewMode === 'weekly'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+          }`}
+        >
+          Săptămânal
+        </button>
+
+        <button
+          onClick={() => setViewMode("daily")}
+          className={`px-4 py-2 rounded font-medium transition ${
+            viewMode === 'daily'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+          }`}
+        >
+          Zilnic
+        </button>
+
         {viewMode === "daily" && (
           <select
-          className="bg-gray-700 text-white border border-gray-500 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
-        >
-        
-            {allMonths.map(m => <option key={m} value={m}>{m}</option>)}
+            className="bg-gray-700 text-white border border-gray-500 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+          >
+            {allMonths.map(m => (
+              <option key={m} value={m}>{m}</option>
+            ))}
           </select>
         )}
       </div>

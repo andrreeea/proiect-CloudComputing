@@ -8,10 +8,19 @@ const getRecords = async () => {
 	return collection.find({}).toArray();
 }
 
-const getRecord = async (id) => {
-    const collection = await getCollection(COLLECTION_NAME);
-    return collection.findOne({_id: ObjectId.createFromHexString(id)});
-}
+// const getRecord = async (id) => {
+//     const collection = await getCollection(COLLECTION_NAME);
+//     return collection.findOne({_id: ObjectId.createFromHexString(id)});
+// }
+
+const getRecord = async (identifier) => {
+	const collection = await getCollection(COLLECTION_NAME);
+	if (/^[0-9a-fA-F]{24}$/.test(identifier)) {
+	  return collection.findOne({ _id: new ObjectId(identifier) });
+	}
+	return collection.findOne({ date: identifier });
+  };
+  
 
 const postRecord = async (record) => {
 	const collection = await getCollection(COLLECTION_NAME);
