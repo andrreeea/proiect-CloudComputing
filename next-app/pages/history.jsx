@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getRecords } from "@/utils/recordsFunctions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Link from "next/link";
+
 
 export default function HistoryPage() {
   const [records, setRecords] = useState([]);
@@ -39,7 +41,9 @@ const filtered = records.filter((r) => {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Istoric Complet EUR/RON</h1>
 
-      <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
+      {/* <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6"> */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 flex-wrap">
+
         <input
           type="text"
           placeholder="Caută dată sau valoare..."
@@ -63,6 +67,13 @@ const filtered = records.filter((r) => {
         >
           Sortează {sortAsc ? "↓" : "↑"}
         </button>
+
+        <Link href="/add">
+          <span className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition cursor-pointer">
+            ➕ Adaugă curs
+          </span>
+        </Link>
+
       </div>
 
       <table className="w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
